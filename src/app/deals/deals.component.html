@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="filter col-2" [class.filter-overlay]="showFilter">
+        <div class="productType">
+            <div *ngFor="let productType of filterProductTypes">
+                <input [id]="productType.value" name="{{productType.value}}" type="checkbox" [(ngModel)]="productType.isSelected" (change)="search()"> {{productType.value}}
+            </div>
+        </div>
+        <div class="speed">
+            <div>Speed</div>
+            <select id="speedSelector" [(ngModel)]="selectedSpeed" (change)="search()">
+              <option *ngFor="let speed of filterSpeeds" [value]="speed">{{speed}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="list col-9">
+        <div class="list-header">
+            <div class="row">
+                <div class="col col-4">About</div>
+                <div class="col col-2">Contract Length</div>
+                <div class="col col-1">Speed/Usage</div>
+                <div class="col col-1">Offer</div>
+                <div class="col col-1">TV</div>
+                <div class="col col-1">Mobile</div>
+                <div class="col col-1">Cost</div>
+            </div>
+        </div>
+        <div id="deals" class="list-body">
+            <div class="row" *ngFor="let deal of filteredDeals">
+                <div class="col col-4">{{deal.title}}</div>
+                <div class="col col-2">{{deal.contractLength}}</div>
+                <div class="col col-1">
+                    <div>{{deal.speed.label}} MB</div>
+                    <div>{{deal.usage.label}}</div>
+                </div>
+                <div class="col col-1">
+                    <img class="offer" [src]="deal.offer.smallLogo" [title]="deal.offer.title">
+                </div>
+                <div class="col col-1">
+                    <span *ngIf="deal.popularChannels?.length === 0">N/A</span>
+                    <div *ngIf="deal.popularChannels?.length > 0">
+                        <div *ngFor="let channel of deal.popularChannels">
+                            <img class="offer" [src]="channel.logo" [title]="channel.title">
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-1">
+                    <span *ngIf="!deal.mobile">N/A</span>
+                    <div *ngIf="deal.mobile">
+                        <div *ngIf="deal.mobile.data">Data: {{deal.mobile.data.label}}</div>
+                        <div *ngIf="deal.mobile.minutes">Minutes: {{deal.mobile.minutes.label}}</div>
+                        <div *ngIf="deal.mobile.texts">Texts: {{deal.mobile.texts.label}}</div>
+                        <div *ngIf="deal.mobile.connectionType">Connection: {{deal.mobile.connectionType.label}}</div>
+                    </div>
+                </div>
+                <div class="col col-1">£{{deal.prices[0].totalContractCost}}</div>
+            </div>
+        </div>
+    </div>
+</div>
