@@ -12,8 +12,7 @@ import 'rxjs/add/operator/toPromise';
 import { DealsService } from './deals.service';
 import { Deal } from './deal';
 
-const mockDeals = {
-  deals: [
+const mockDeals = [
   {
     'title': 'Unlimited Broadband & Weekend Calls',
     'prices': [
@@ -214,7 +213,7 @@ const mockDeals = {
       }
     ]
   }
-]};
+];
 
 describe('DealsService', () => {
   beforeEach(() => {
@@ -235,7 +234,7 @@ describe('DealsService', () => {
     async(inject([DealsService, XHRBackend], (service: DealsService, mockBackend: MockBackend) => {
       mockBackend.connections.subscribe((connection) => {
         connection.mockRespond(new Response(new ResponseOptions({
-          body: JSON.stringify({deals: []})
+          body: JSON.stringify([])
         })));
       });
 

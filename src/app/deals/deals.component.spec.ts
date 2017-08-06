@@ -13,6 +13,7 @@ import { DealsService } from './deals.service';
 import { Deal } from './deal';
 
 class MockDealsService extends DealsService {
+  protected dealUrl = `assets/deals.json`;
 }
 
 describe('DealsComponent', () => {

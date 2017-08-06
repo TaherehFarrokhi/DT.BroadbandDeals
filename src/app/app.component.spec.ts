@@ -7,6 +7,7 @@ import {
   ResponseOptions,
   XHRBackend
 } from '@angular/http';
+
 import { By } from '@angular/platform-browser';
 
 import { MockBackend } from '@angular/http/testing';

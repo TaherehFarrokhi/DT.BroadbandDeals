@@ -7,15 +7,15 @@ import { Deal } from './deal';
 @Injectable()
 export class DealsService {
 
+  protected dealUrl = 'http://localhost:5000/api/v1/deals';
+
   constructor(private http: Http) { }
 
   getAll(): Promise<Deal[]> {
-    const url = `assets/deals.json`;
-
-    return this.http.get(url)
+    return this.http.get(this.dealUrl)
       .toPromise()
       .then(res => {
-        const deals = res.json().deals as Deal[];
+        const deals = res.json() as Deal[];
         return deals;
       })
       .catch(this.handleError);
